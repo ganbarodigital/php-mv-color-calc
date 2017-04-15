@@ -34,39 +34,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Libraries
- * @package   ColorCalc/Maps
+ * @package   ColorCalc/Exceptions
  * @author    Stuart Herbert <stuherbert@ganbarodigital.com>
  * @copyright 2017-present Ganbaro Digital Ltd www.ganbarodigital.com
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link      http://ganbarodigital.github.io/php-mv-color-calc
  */
 
-namespace GanbaroDigital\ColorCalc\V1\Maps;
-
-use GanbaroDigital\ColorCalc\V1\Exceptions\UnknownCssColorKeyword;
+namespace GanbaroDigital\ColorCalc\V1\Exceptions;
 
 /**
- * convert a named CSS color to its #RRGGBB value
+ * used for type-hinting all exceptions thrown by this library
  */
-class MapCssColorKeywordToValue
+interface ColorCalcException
 {
-    /**
-     * convert a named CSS color to its #RRGGBB value
-     *
-     * @param  string $color
-     *         the named CSS color
-     * @return string
-     *         the color's #RRGGBB value
-     *
-     * @throws UnknownCssColorKeyword
-     *         if $color contains a name we do not know about
-     */
-    public static function from($color)
-    {
-        if (isset(CssColorKeywords::KeywordsToHex[$color])) {
-            return CssColorKeywords::KeywordsToHex[$color];
-        }
 
-        throw UnknownCssColorKeyword::newFromInputParameter($color, '$color');
-    }
 }

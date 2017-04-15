@@ -34,39 +34,29 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * @category  Libraries
- * @package   ColorCalc/Maps
+ * @package   ColorCalc/Exceptions
  * @author    Stuart Herbert <stuherbert@ganbarodigital.com>
  * @copyright 2017-present Ganbaro Digital Ltd www.ganbarodigital.com
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
  * @link      http://ganbarodigital.github.io/php-mv-color-calc
  */
 
-namespace GanbaroDigital\ColorCalc\V1\Maps;
+namespace GanbaroDigital\ColorCalc\V1\Exceptions;
 
-use GanbaroDigital\ColorCalc\V1\Exceptions\UnknownCssColorKeyword;
+use GanbaroDigital\ExceptionHelpers\V1\BaseExceptions\ParameterisedException;
+use GanbaroDigital\HttpStatus\Interfaces\HttpRuntimeErrorException;
+use GanbaroDigital\HttpStatus\StatusProviders\RuntimeError\UnexpectedErrorStatusProvider;
 
 /**
- * convert a named CSS color to its #RRGGBB value
+ * exception thrown when we do not recognise a named CSS color
  */
-class MapCssColorKeywordToValue
+class UnknownCssColorKeyword
+  extends ParameterisedException
+  implements ColorCalcException, HttpRuntimeErrorException
 {
-    /**
-     * convert a named CSS color to its #RRGGBB value
-     *
-     * @param  string $color
-     *         the named CSS color
-     * @return string
-     *         the color's #RRGGBB value
-     *
-     * @throws UnknownCssColorKeyword
-     *         if $color contains a name we do not know about
-     */
-    public static function from($color)
-    {
-        if (isset(CssColorKeywords::KeywordsToHex[$color])) {
-            return CssColorKeywords::KeywordsToHex[$color];
-        }
+    // we map onto HTTP 500
+    use UnexpectedErrorStatusProvider;
 
-        throw UnknownCssColorKeyword::newFromInputParameter($color, '$color');
-    }
+    // our format string
+    static protected $defaultFormat = "'%fieldOrVarName\$s' is not a CSS color that we recognise";
 }

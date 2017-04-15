@@ -15,4 +15,6 @@
   - added `IsCssColorValue` check
   - added `MapCssColorKeywordToValue`
   - added `RemoveHashPrefix` value editor
+  - added `RequireValidCssColorValue` robustness check
   - added `UnknownCssColorKeyword` exception
+  - added `UnsupportedCssColorValue` exception

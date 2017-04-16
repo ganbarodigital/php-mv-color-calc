@@ -43,7 +43,7 @@
 
 namespace GanbaroDigital\ColorCalc\V1\RGB;
 
-use GanbaroDigital\CssParser\V1\Values\CssColorValue;
+use GanbaroDigital\CssParser\V1\Values\CssColor;
 
 /**
  * what is the contrast ratio between two colors?
